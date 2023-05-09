@@ -14,10 +14,25 @@ import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * The type Menu bar.
+ */
 public class MenuBar extends JMenuBar implements ActionListener {
+    /**
+     * The Balance.
+     */
     Balance balance;
+    /**
+     * The Table.
+     */
     JTable table;
 
+    /**
+     * Instantiates a new Menu bar.
+     *
+     * @param balance the balance
+     * @param table   the table
+     */
     public MenuBar(Balance balance, JTable table) {
         super();
         this.balance = balance;

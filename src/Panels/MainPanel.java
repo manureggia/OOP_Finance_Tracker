@@ -10,10 +10,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Main panel.
+ */
 public class MainPanel extends JPanel implements ActionListener {
     private Balance balance;
     private JTable table;
 
+    /**
+     * Instantiates a new Main panel.
+     *
+     * @param balance the balance
+     * @param table   the table
+     */
     public MainPanel(Balance balance, JTable table) {
         super();
         this.balance = balance;

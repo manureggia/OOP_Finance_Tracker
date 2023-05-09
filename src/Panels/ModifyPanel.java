@@ -11,6 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The type Modify panel.
+ */
 public class ModifyPanel extends JPanel implements ActionListener {
     private JButton add;
     private JTextField datetxt, desctxt, ammtxt;
@@ -20,6 +23,13 @@ public class ModifyPanel extends JPanel implements ActionListener {
     private JFrame thisframe;
 
 
+    /**
+     * Instantiates a new Modify panel.
+     *
+     * @param table       the table
+     * @param transaction the transaction
+     * @param thisframe   the thisframe
+     */
     public ModifyPanel(JTable table, Transaction transaction, JFrame thisframe) {
         this.table = table;
         this.transaction = transaction;

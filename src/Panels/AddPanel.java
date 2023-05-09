@@ -12,6 +12,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The type Add panel.
+ */
 public class AddPanel extends JPanel implements ActionListener {
 
     private JButton add;
@@ -20,6 +23,12 @@ public class AddPanel extends JPanel implements ActionListener {
     private JTable table;
     private JFrame thisframe;
 
+    /**
+     * Instantiates a new Add panel.
+     *
+     * @param table     the table
+     * @param thisframe the thisframe
+     */
     public AddPanel(JTable table, JFrame thisframe){
         super();
         this.table = table;

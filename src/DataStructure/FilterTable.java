@@ -8,13 +8,29 @@ import javax.swing.table.TableRowSorter;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * The type Filter table.
+ */
 public class FilterTable {
+    /**
+     * The Table.
+     */
     JTable table;
 
+    /**
+     * Instantiates a new Filter table.
+     *
+     * @param table the table
+     */
     public FilterTable(JTable table) {
         this.table = table;
     }
 
+    /**
+     * Filter table.
+     *
+     * @param period the period
+     */
     public void filterTable(String period){
         try {
             Calendar cal = Calendar.getInstance();
