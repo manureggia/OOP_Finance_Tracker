@@ -3,9 +3,11 @@ package Panels;
 import DataStructure.Balance;
 import DataStructure.TableModel.BalanceTableModel;
 import DataStructure.Transaction;
+import Listener.SorterListener;
 import Listener.TotalListener;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,15 +19,18 @@ public class MainPanel extends JPanel implements ActionListener {
     private Balance balance;
     private JTable table;
 
+    private JTextField totaltxt;
+
     /**
      * Instantiates a new Main panel.
      *
      * @param balance the balance
      * @param table   the table
      */
-    public MainPanel(Balance balance, JTable table) {
+    public MainPanel(Balance balance, JTable table, JTextField totaltxt) {
         super();
         this.balance = balance;
+        this.totaltxt = totaltxt;
         this.setLayout(new BorderLayout());
         //creation of the table and the table model
         this.table = table;
@@ -45,13 +50,13 @@ public class MainPanel extends JPanel implements ActionListener {
         JButton addbutton = new JButton("Insert");
         addbutton.addActionListener(this);
         buttons.add(addbutton);
-        JTextField totaltxt = new JTextField("Total: "+balance.getTotal());
+         totaltxt.setText("Total: "+balance.getTotal());
         totaltxt.setEditable(false);
-        model.addTableModelListener(new TotalListener(totaltxt,this.balance));
-
+        model.addTableModelListener(new TotalListener(totaltxt,table));
         add(totaltxt, BorderLayout.CENTER);
-
         add(buttons, BorderLayout.SOUTH);
+        //RowSorter<? extends TableModel> sorter = table.getRowSorter();
+        //sorter.addRowSorterListener(new SorterListener(table, totaltxt));
         //AddPanel addpanel = new AddPanel(balance,table);
         //add(addpanel,BorderLayout.SOUTH);
 
@@ -75,7 +80,11 @@ public class MainPanel extends JPanel implements ActionListener {
             modFrame.setVisible(true);
         }else {
             BalanceTableModel model = (BalanceTableModel) table.getModel();
-            model.deleteElementAt(table.getSelectedRow());
+            int[] selectedRows = table.getSelectedRows();
+            for(int i=selectedRows.length -1; i >= 0; i--){
+                model.deleteElementAt(selectedRows[i]);
+            }
+            //model.deleteElementAt(table.getSelectedRow());
         }
     }
 }

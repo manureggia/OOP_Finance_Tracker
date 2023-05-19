@@ -20,8 +20,9 @@ public class Main {
         JFrame mainFrame = new JFrame("Balance");
         BalanceTableModel model = new BalanceTableModel(balance);
         JTable table = new JTable(model);
-        MainPanel mainpanel = new MainPanel(balance,table);
-        MenuBar menubar = new MenuBar(balance,table);
+        JTextField totaltxt = new JTextField();
+        MainPanel mainpanel = new MainPanel(balance,table,totaltxt);
+        MenuBar menubar = new MenuBar(balance,table,totaltxt);
         mainFrame.setJMenuBar(menubar);
         mainFrame.add(mainpanel);
         mainFrame.pack();

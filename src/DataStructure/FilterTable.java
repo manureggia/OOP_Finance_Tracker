@@ -2,6 +2,7 @@ package DataStructure;
 
 import DataStructure.TableModel.BalanceTableModel;
 import DataStructure.TableModel.DataFilter;
+import Listener.SorterListener;
 
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
@@ -16,14 +17,16 @@ public class FilterTable {
      * The Table.
      */
     JTable table;
+    JTextField totaltxt;
 
     /**
      * Instantiates a new Filter table.
      *
      * @param table the table
      */
-    public FilterTable(JTable table) {
+    public FilterTable(JTable table, JTextField totaltxt) {
         this.table = table;
+        this.totaltxt = totaltxt;
     }
 
     /**
@@ -56,6 +59,11 @@ public class FilterTable {
             // set the row filter on the table sorter
             rowFilter.setRowFilter(dataFilter);
             table.setRowSorter(rowFilter);
+            rowFilter.addRowSorterListener(new SorterListener(table,totaltxt));
+            for (int i=0; i<rowFilter.getViewRowCount();i++){
+                System.out.println("Real index: "+rowFilter.convertRowIndexToModel(i));
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

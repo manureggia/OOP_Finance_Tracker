@@ -57,6 +57,10 @@ public class BalanceTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public Transaction getElementAt(int index){
+        return balance.getElementAt(index);
+    }
+
     public void modifyRow(Transaction t, Date date, String description, Double ammount){
         t.setDate(date);
         t.setAmount(ammount);
@@ -64,4 +68,7 @@ public class BalanceTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public double getCalTotal(){
+        return balance.calcTotal();
+    }
 }

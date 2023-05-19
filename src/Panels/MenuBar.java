@@ -2,8 +2,10 @@ package Panels;
 import DataStructure.*;
 import DataStructure.TableModel.BalanceTableModel;
 import DataStructure.TableModel.DataFilter;
+import Listener.SorterListener;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +23,12 @@ public class MenuBar extends JMenuBar implements ActionListener {
     /**
      * The Balance.
      */
-    Balance balance;
+    private Balance balance;
     /**
      * The Table.
      */
-    JTable table;
+    private JTable table;
+    private JTextField totaltxt;
 
     /**
      * Instantiates a new Menu bar.
@@ -33,10 +36,11 @@ public class MenuBar extends JMenuBar implements ActionListener {
      * @param balance the balance
      * @param table   the table
      */
-    public MenuBar(Balance balance, JTable table) {
+    public MenuBar(Balance balance, JTable table, JTextField totaltxt) {
         super();
         this.balance = balance;
         this.table = table;
+        this.totaltxt = totaltxt;
         JMenu sorter = new JMenu("Filter");
         JMenu file = new JMenu("File");
         //sorting menu
@@ -62,7 +66,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        FilterTable filter = new FilterTable(table);
+        FilterTable filter = new FilterTable(table,totaltxt);
+        BalanceTableModel model = (BalanceTableModel) table.getModel();
         if(e.getActionCommand().equals("None")){
             table.setRowSorter(null);
         }
@@ -75,7 +80,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
         else if (e.getActionCommand().equals("Last Year")) {
             filter.filterTable("year");
         }
-        BalanceTableModel model = (BalanceTableModel) table.getModel();
         model.fireTableDataChanged();
 
     }

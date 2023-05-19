@@ -8,15 +8,16 @@ import javax.swing.event.TableModelListener;
 
 public class TotalListener implements TableModelListener {
     JTextField textField;
-    Balance balance;
+    JTable table;
 
-    public TotalListener(JTextField textField, Balance balance) {
+    public TotalListener(JTextField textField, JTable table) {
         this.textField = textField;
-        this.balance = balance;
+        this.table = table;
     }
 
     @Override
     public void tableChanged(TableModelEvent e) {
-        textField.setText("Total: "+balance.calcTotal());
+        BalanceTableModel model = (BalanceTableModel) table.getModel();
+        textField.setText("Total: "+model.getCalTotal());
     }
 }
