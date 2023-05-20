@@ -1,5 +1,6 @@
 package DataStructure;
 
+import java.io.Serializable;
 import java.lang.String;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +10,7 @@ import java.util.Objects;
 /**
  * The type Transaction.
  */
-public class Transaction {
+public class Transaction implements Serializable {
 
     private Date date;
     private String description;
@@ -35,7 +36,7 @@ public class Transaction {
      *
      * @return the date
      */
-    public Date getDate() {
+    public synchronized Date getDate() {
         return date;
     }
 
@@ -44,7 +45,7 @@ public class Transaction {
      *
      * @return the string date
      */
-    public String getStringDate() {
+    public synchronized String getStringDate() {
         return formatter.format(date);
     }
 
@@ -53,7 +54,7 @@ public class Transaction {
      *
      * @param date the date
      */
-    public void setDate(Date date) {
+    public synchronized void setDate(Date date) {
         this.date = date;
     }
 
@@ -62,7 +63,7 @@ public class Transaction {
      *
      * @return the description
      */
-    public String getDescription() {
+    public synchronized String getDescription() {
         return description;
     }
 
@@ -71,7 +72,7 @@ public class Transaction {
      *
      * @param description the description
      */
-    public void setDescription(String description) {
+    public synchronized void setDescription(String description) {
         this.description = description;
     }
 
@@ -80,7 +81,7 @@ public class Transaction {
      *
      * @return the amount
      */
-    public double getAmount() {
+    public synchronized double getAmount() {
         return amount;
     }
 
@@ -89,7 +90,7 @@ public class Transaction {
      *
      * @param amount the amount
      */
-    public void setAmount(double amount) {
+    public synchronized void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -100,5 +101,7 @@ public class Transaction {
         Transaction that = (Transaction) o;
         return Double.compare(that.amount, amount) == 0 && Objects.equals(date, that.date) && Objects.equals(description, that.description);
     }
+
+
 
 }

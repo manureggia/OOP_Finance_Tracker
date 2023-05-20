@@ -22,7 +22,7 @@ public class Main {
         JTable table = new JTable(model);
         JTextField totaltxt = new JTextField();
         MainPanel mainpanel = new MainPanel(balance,table,totaltxt);
-        MenuBar menubar = new MenuBar(balance,table,totaltxt);
+        MenuBar menubar = new MenuBar(table,totaltxt);
         mainFrame.setJMenuBar(menubar);
         mainFrame.add(mainpanel);
         mainFrame.pack();

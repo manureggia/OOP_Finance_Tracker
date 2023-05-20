@@ -1,12 +1,16 @@
 package DataStructure;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
 /**
  * The type Balance.
  */
-public class Balance {
+public class Balance implements Serializable {
     private ArrayList<Transaction> transactionVector;
     private double total;
 
@@ -23,7 +27,7 @@ public class Balance {
      *
      * @param e the transaction
      */
-    public void addTransaction(Transaction e){
+    public synchronized void addTransaction(Transaction e){
         transactionVector.add(e);
         total += e.getAmount();
     }
@@ -33,7 +37,7 @@ public class Balance {
      *
      * @param e the transaction
      */
-    public void removeTransaction(Transaction e){
+    public synchronized  void removeTransaction(Transaction e){
         transactionVector.remove(e);
         total -= e.getAmount();
     }
@@ -43,7 +47,7 @@ public class Balance {
      *
      * @return the total
      */
-    public double calcTotal(){
+    public synchronized double calcTotal(){
         total = 0;
         for (Transaction t : transactionVector) {
             total += t.getAmount();

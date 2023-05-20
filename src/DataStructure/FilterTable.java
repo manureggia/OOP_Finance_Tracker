@@ -60,11 +60,6 @@ public class FilterTable {
             rowFilter.setRowFilter(dataFilter);
             table.setRowSorter(rowFilter);
             rowFilter.addRowSorterListener(new SorterListener(table,totaltxt));
-            for (int i=0; i<rowFilter.getViewRowCount();i++){
-                System.out.println("Real index: "+rowFilter.convertRowIndexToModel(i));
-
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

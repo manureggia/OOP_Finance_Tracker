@@ -50,17 +50,11 @@ public class MainPanel extends JPanel implements ActionListener {
         JButton addbutton = new JButton("Insert");
         addbutton.addActionListener(this);
         buttons.add(addbutton);
-         totaltxt.setText("Total: "+balance.getTotal());
+        totaltxt.setText("Total: "+balance.getTotal());
         totaltxt.setEditable(false);
         model.addTableModelListener(new TotalListener(totaltxt,table));
         add(totaltxt, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
-        //RowSorter<? extends TableModel> sorter = table.getRowSorter();
-        //sorter.addRowSorterListener(new SorterListener(table, totaltxt));
-        //AddPanel addpanel = new AddPanel(balance,table);
-        //add(addpanel,BorderLayout.SOUTH);
-
-
     }
 
     @Override

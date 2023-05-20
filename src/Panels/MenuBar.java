@@ -2,6 +2,7 @@ package Panels;
 import DataStructure.*;
 import DataStructure.TableModel.BalanceTableModel;
 import DataStructure.TableModel.DataFilter;
+import Listener.SaveListener;
 import Listener.SorterListener;
 
 import javax.swing.*;
@@ -20,31 +21,22 @@ import java.util.Date;
  * The type Menu bar.
  */
 public class MenuBar extends JMenuBar implements ActionListener {
-    /**
-     * The Balance.
-     */
-    private Balance balance;
+
     /**
      * The Table.
      */
     private JTable table;
     private JTextField totaltxt;
 
-    /**
-     * Instantiates a new Menu bar.
-     *
-     * @param balance the balance
-     * @param table   the table
-     */
-    public MenuBar(Balance balance, JTable table, JTextField totaltxt) {
+
+    public MenuBar(JTable table, JTextField totaltxt) {
         super();
-        this.balance = balance;
         this.table = table;
         this.totaltxt = totaltxt;
         JMenu sorter = new JMenu("Filter");
         JMenu file = new JMenu("File");
-        //sorting menu
 
+        //sorting menu
         JCheckBoxMenuItem none = new JCheckBoxMenuItem("None",true);
         JCheckBoxMenuItem week = new JCheckBoxMenuItem("Last Week");
         JCheckBoxMenuItem month = new JCheckBoxMenuItem("Last Month");
@@ -56,11 +48,26 @@ public class MenuBar extends JMenuBar implements ActionListener {
         month.addActionListener(this);
         year.addActionListener(this);
         sorter.add(none);sorter.add(week); sorter.add(month); sorter.add(year);
+        this.add(file);
+        this.add(sorter);
+
         //file menu
+        JMenuItem open = new JMenuItem("Open");
+        JMenuItem save = new JMenuItem("Save");
+        JMenu export = new JMenu("Export");
+        JMenuItem csvbutton = new JMenuItem("CSV");
+        JMenuItem txtbutton = new JMenuItem("Text");
+        SaveListener saveListener = new SaveListener(table);
+        save.addActionListener(saveListener);
+        open.addActionListener(saveListener);
+        export.add(csvbutton);
+        export.add(txtbutton);
+        file.add(open);
+        file.add(save);
+        file.add(export);
 
 
-        add(file);
-        add(sorter);
+
     }
 
 
