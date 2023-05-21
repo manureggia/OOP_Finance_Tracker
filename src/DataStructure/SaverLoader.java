@@ -4,8 +4,8 @@ import java.io.*;
 
 public class SaverLoader {
     public SaverLoader() {
-
     }
+
 
     public void saveData(Balance balance, File file) throws IOException {
         FileOutputStream stream = new FileOutputStream(file);

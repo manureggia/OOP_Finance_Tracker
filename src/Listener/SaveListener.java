@@ -1,6 +1,7 @@
 package Listener;
 
 import DataStructure.TableModel.BalanceTableModel;
+import Panels.OverwritePanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -17,6 +18,23 @@ public class SaveListener implements ActionListener {
         this.table = table;
     }
 
+    private boolean checkFileExistance(File file){
+        boolean returnvalue = false;
+        String path = file.getAbsolutePath().replace(file.getName(),"");
+        File listfile = new File(path);
+        for(String filename: listfile.list()){
+            if (filename.equals(file.getName())){
+                JFrame frame = new JFrame("Salvataggio");
+                OverwritePanel panel = new OverwritePanel(filename,returnvalue,frame);
+                frame.add(panel);
+                frame.pack();
+                frame.setVisible(true);
+                return returnvalue;
+            }
+        }
+        return returnvalue;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         BalanceTableModel model = (BalanceTableModel) table.getModel();
@@ -26,14 +44,16 @@ public class SaveListener implements ActionListener {
             int userSelection = fileChooser.showSaveDialog(null);
             if(userSelection == JFileChooser.APPROVE_OPTION){
                 File file = fileChooser.getSelectedFile();
-                //check if file aready exists
+                boolean exists = checkFileExistance(file);
                 //save file
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("Binary file (*.bin)",".bin");
                 fileChooser.setFileFilter(filter);
-                try {
-                    model.saveFile(file);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                if(exists) {
+                    try {
+                        model.saveFile(file);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         }
