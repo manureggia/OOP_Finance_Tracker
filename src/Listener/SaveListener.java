@@ -1,7 +1,6 @@
 package Listener;
 
 import DataStructure.TableModel.BalanceTableModel;
-import Panels.OverwritePanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -9,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class SaveListener implements ActionListener {
 
@@ -18,21 +18,15 @@ public class SaveListener implements ActionListener {
         this.table = table;
     }
 
-    private boolean checkFileExistance(File file){
-        boolean returnvalue = false;
+    private int checkFileExistance(File file){
         String path = file.getAbsolutePath().replace(file.getName(),"");
         File listfile = new File(path);
-        for(String filename: listfile.list()){
+        for(String filename: Objects.requireNonNull(listfile.list())){
             if (filename.equals(file.getName())){
-                JFrame frame = new JFrame("Salvataggio");
-                OverwritePanel panel = new OverwritePanel(filename,returnvalue,frame);
-                frame.add(panel);
-                frame.pack();
-                frame.setVisible(true);
-                return returnvalue;
+                return JOptionPane.showConfirmDialog(table, "the file "+filename+" already exists, do you want to overwrite it?","Overwrite",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
             }
         }
-        return returnvalue;
+        return -2;
     }
 
     @Override
@@ -44,17 +38,20 @@ public class SaveListener implements ActionListener {
             int userSelection = fileChooser.showSaveDialog(null);
             if(userSelection == JFileChooser.APPROVE_OPTION){
                 File file = fileChooser.getSelectedFile();
-                boolean exists = checkFileExistance(file);
+                int exitStatus = checkFileExistance(file);
                 //save file
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("Binary file (*.bin)",".bin");
                 fileChooser.setFileFilter(filter);
-                if(exists) {
+                if(exitStatus == -2 || exitStatus == JOptionPane.YES_OPTION) {
                     try {
                         model.saveFile(file);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                } else if (exitStatus == JOptionPane.NO_OPTION) {
+                    actionPerformed(e);
                 }
+
             }
         }
         else if(e.getActionCommand().equals("Open")){

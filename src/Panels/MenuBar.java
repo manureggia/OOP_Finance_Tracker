@@ -1,21 +1,11 @@
 package Panels;
 import DataStructure.*;
 import DataStructure.TableModel.BalanceTableModel;
-import DataStructure.TableModel.DataFilter;
 import Listener.SaveListener;
-import Listener.SorterListener;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * The type Menu bar.
@@ -27,12 +17,15 @@ public class MenuBar extends JMenuBar implements ActionListener {
      */
     private JTable table;
     private JTextField totaltxt;
+    FilterTable filter;
 
 
-    public MenuBar(JTable table, JTextField totaltxt) {
+
+    public MenuBar(JTable table, JTextField totaltxt,FilterTable filter) {
         super();
         this.table = table;
         this.totaltxt = totaltxt;
+        this.filter = filter;
         JMenu sorter = new JMenu("Filter");
         JMenu file = new JMenu("File");
 
@@ -73,19 +66,18 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        FilterTable filter = new FilterTable(table,totaltxt);
         BalanceTableModel model = (BalanceTableModel) table.getModel();
         if(e.getActionCommand().equals("None")){
             table.setRowSorter(null);
         }
         else if (e.getActionCommand().equals("Last Month")){
-            filter.filterTable("month");
+            filter.applyFilter("month");
         }
         else if (e.getActionCommand().equals("Last Week")){
-            filter.filterTable("week");
+            filter.applyFilter("week");
         }
         else if (e.getActionCommand().equals("Last Year")) {
-            filter.filterTable("year");
+            filter.applyFilter("year");
         }
         model.fireTableDataChanged();
 

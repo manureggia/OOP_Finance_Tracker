@@ -8,6 +8,7 @@ import Listener.TotalListener;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,6 +60,8 @@ public class MainPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        RowSorter<? extends TableModel> sorter = table.getRowSorter();
+        BalanceTableModel model = (BalanceTableModel) table.getModel();
         if(e.getActionCommand().equals("Insert")){
             JFrame addFrame = new JFrame("Insert");
             AddPanel addpanel = new AddPanel(table, addFrame);
@@ -66,18 +69,30 @@ public class MainPanel extends JPanel implements ActionListener {
             addFrame.pack();
             addFrame.setVisible(true);
         } else if (e.getActionCommand().equals("Modify")) {
-            Transaction t = balance.getElementAt(table.getSelectedRow());
+            Transaction t;
+            if(sorter == null) {
+                t = model.getElementAt(table.getSelectedRow());
+            } else {
+                t = model.getElementAt(sorter.convertRowIndexToModel(table.getSelectedRow()));
+            }
             JFrame modFrame = new JFrame("Modify");
             ModifyPanel modifyPanel = new ModifyPanel(table,t,modFrame);
             modFrame.add(modifyPanel);
             modFrame.pack();
             modFrame.setVisible(true);
         }else {
-            BalanceTableModel model = (BalanceTableModel) table.getModel();
             int[] selectedRows = table.getSelectedRows();
-            for(int i=selectedRows.length -1; i >= 0; i--){
-                model.deleteElementAt(selectedRows[i]);
+            if (sorter == null){
+                for(int i=selectedRows.length -1; i >= 0; i--){
+                    model.deleteElementAt(selectedRows[i]);
+                }
             }
+            else {
+                for(int i=selectedRows.length -1; i >= 0; i--) {
+                    model.deleteElementAt(sorter.convertRowIndexToModel(selectedRows[i]));
+                }
+            }
+
             //model.deleteElementAt(table.getSelectedRow());
         }
     }

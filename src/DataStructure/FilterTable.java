@@ -16,8 +16,8 @@ public class FilterTable {
     /**
      * The Table.
      */
-    JTable table;
-    JTextField totaltxt;
+    private JTable table;
+    private JTextField totaltxt;
 
     /**
      * Instantiates a new Filter table.
@@ -34,7 +34,7 @@ public class FilterTable {
      *
      * @param period the period
      */
-    public void filterTable(String period){
+    public void applyFilter(String period){
         try {
             Calendar cal = Calendar.getInstance();
             Date filterDate = null;

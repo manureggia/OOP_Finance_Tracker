@@ -1,4 +1,5 @@
 import DataStructure.Balance;
+import DataStructure.FilterTable;
 import DataStructure.TableModel.BalanceTableModel;
 import Panels.MainPanel;
 import Panels.MenuBar;
@@ -15,14 +16,17 @@ public class Main {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-
+        //variable init
         Balance balance = new Balance();
         JFrame mainFrame = new JFrame("Balance");
         BalanceTableModel model = new BalanceTableModel(balance);
         JTable table = new JTable(model);
         JTextField totaltxt = new JTextField();
         MainPanel mainpanel = new MainPanel(balance,table,totaltxt);
-        MenuBar menubar = new MenuBar(table,totaltxt);
+        FilterTable filter = new FilterTable(table,totaltxt);
+        MenuBar menubar = new MenuBar(table,totaltxt,filter);
+
+        //GUI FRAME
         mainFrame.setJMenuBar(menubar);
         mainFrame.add(mainpanel);
         mainFrame.pack();

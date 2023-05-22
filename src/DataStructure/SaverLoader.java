@@ -10,7 +10,6 @@ public class SaverLoader {
     public void saveData(Balance balance, File file) throws IOException {
         FileOutputStream stream = new FileOutputStream(file);
         ObjectOutputStream out = new ObjectOutputStream(stream);
-
         try {
             if(balance != null) {
                 synchronized (balance) {
@@ -21,10 +20,10 @@ public class SaverLoader {
             stream.close();
         }
     }
+
     public Balance loadData(File file) throws IOException {
         FileInputStream stream = new FileInputStream(file);
         ObjectInputStream in = new ObjectInputStream(stream);
-
         try {
             Balance b = (Balance) in.readObject();
             return b;
