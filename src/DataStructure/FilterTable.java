@@ -34,7 +34,7 @@ public class FilterTable {
     /**
      * Filter table.
      *
-     * @param period the period
+     * @param d1 the period
      */
     public void applyFilter(Date d1, Date d2){
             BalanceTableModel model = (BalanceTableModel) table.getModel();
