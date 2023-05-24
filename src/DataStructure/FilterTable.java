@@ -6,6 +6,8 @@ import Listener.SorterListener;
 
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,35 +36,19 @@ public class FilterTable {
      *
      * @param period the period
      */
-    public void applyFilter(String period){
-        try {
-            Calendar cal = Calendar.getInstance();
-            Date filterDate = null;
-            switch (period){
-                case "week":
-                    cal.add(Calendar.DATE, -7);
-                    filterDate = cal.getTime();
-                    break;
-                case "month":
-                    cal.add(Calendar.MONTH, -1);
-                    filterDate = cal.getTime();
-                    break;
-                case "year":
-                    cal.add(Calendar.YEAR, -1);
-                    filterDate = cal.getTime();
-                    break;
-            }
+    public void applyFilter(Date d1, Date d2){
             BalanceTableModel model = (BalanceTableModel) table.getModel();
             // create a row filter to show only dates after the filter date
-            DataFilter dataFilter = new DataFilter(filterDate);
+            DataFilter dataFilter = new DataFilter(d1,d2);
             TableRowSorter<BalanceTableModel> rowFilter = new TableRowSorter<>(model);
             // set the row filter on the table sorter
             rowFilter.setRowFilter(dataFilter);
             table.setRowSorter(rowFilter);
             rowFilter.addRowSorterListener(new SorterListener(table,totaltxt));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    }
 
+    public void applyFilter(String d1, String d2) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        applyFilter(format.parse(d1),format.parse(d2));
     }
 }

@@ -6,6 +6,8 @@ import Listener.SaveListener;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * The type Menu bar.
@@ -66,20 +68,16 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        JTextField start = new JTextField(25), end =  new JTextField(25);
+        int response = JOptionPane.showConfirmDialog(table,new DateCustomFilterPanel(start,end),"Custom Date Chooser",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+        if(response == JOptionPane.OK_OPTION){
+            try {
+                filter.applyFilter(start.getText(),end.getText());
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
         BalanceTableModel model = (BalanceTableModel) table.getModel();
-        if(e.getActionCommand().equals("None")){
-            table.setRowSorter(null);
-        }
-        else if (e.getActionCommand().equals("Last Month")){
-            filter.applyFilter("month");
-        }
-        else if (e.getActionCommand().equals("Last Week")){
-            filter.applyFilter("week");
-        }
-        else if (e.getActionCommand().equals("Last Year")) {
-            filter.applyFilter("year");
-        }
         model.fireTableDataChanged();
-
     }
 }

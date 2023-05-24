@@ -9,16 +9,18 @@ import javax.swing.RowFilter;
 
 public class DataFilter extends RowFilter<Object, Object> {
 
-    private Date date;
+    private Date startDate, endDate;
     private SimpleDateFormat dateFormat;
 
-    public DataFilter(String date) throws ParseException {
+    public DataFilter(String startDate, String endDate) throws ParseException {
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        this.date = dateFormat.parse(date);
+        this.startDate = dateFormat.parse(startDate);
+        this.endDate = dateFormat.parse(endDate);
     }
-    public DataFilter(Date date){
+    public DataFilter(Date startDate, Date endDate){
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -29,7 +31,12 @@ public class DataFilter extends RowFilter<Object, Object> {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        return rowDate.compareTo(date) >= 0;
+        System.out.println(startDate + " "+rowDate +" " + endDate);
+        System.out.println("1° compare: " +rowDate.compareTo(startDate));
+        System.out.println("2° compare: " +rowDate.compareTo(endDate));
+        System.out.println(rowDate.compareTo(endDate) >= 0 && rowDate.compareTo(startDate) <= 0);
+
+        return rowDate.compareTo(endDate) >= 0 && rowDate.compareTo(startDate) <= 0;
     }
 
 }
