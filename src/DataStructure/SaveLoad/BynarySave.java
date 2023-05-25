@@ -1,8 +1,11 @@
-package DataStructure;
+package DataStructure.SaveLoad;
+
+import DataStructure.AbstractSaver;
+import DataStructure.Balance;
 
 import java.io.*;
 
-public class BynarySave extends AbstractSaver{
+public class BynarySave extends AbstractSaver {
     public BynarySave() {
     }
 

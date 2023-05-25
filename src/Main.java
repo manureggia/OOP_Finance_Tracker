@@ -23,7 +23,7 @@ public class Main {
             System.setProperty( "apple.awt.application.name", "Finance Tracker" );
             System.setProperty( "apple.awt.application.appearance", "system" );
         }
-        FlatLightLaf.setup();
+       // FlatLightLaf.setup();
     }
 
 

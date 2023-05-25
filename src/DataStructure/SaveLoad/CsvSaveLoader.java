@@ -1,4 +1,8 @@
-package DataStructure;
+package DataStructure.SaveLoad;
+
+import DataStructure.AbstractSaver;
+import DataStructure.Balance;
+import DataStructure.Transaction;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,7 +10,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class CsvSaveLoader extends AbstractSaver{
+public class CsvSaveLoader extends AbstractSaver {
     public CsvSaveLoader() {
     }
 
@@ -38,7 +42,6 @@ public class CsvSaveLoader extends AbstractSaver{
             b.addTransaction(new Transaction(riga[0],riga[2],Double.parseDouble(riga[1])));
         }
         reader.close();
-
-        return null;
+        return b;
     }
 }

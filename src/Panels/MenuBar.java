@@ -43,18 +43,21 @@ public class MenuBar extends JMenuBar implements ActionListener {
         //file menu
         JMenuItem open = new JMenuItem("Open");
         JMenuItem save = new JMenuItem("Save");
-        JMenu export = new JMenu("Export");
+        /* JMenu export = new JMenu("Export");
         JMenuItem csvbutton = new JMenuItem("CSV");
         JMenuItem txtbutton = new JMenuItem("Text");
-        SaveListener saveListener = new SaveListener(table);
-        save.addActionListener(saveListener);
-        csvbutton.addActionListener(saveListener);
-        open.addActionListener(saveListener);
         export.add(csvbutton);
         export.add(txtbutton);
+        JMenu importmenu = new JMenu("Import"); */
+
+
+        SaveListener saveListener = new SaveListener(table);
+        save.addActionListener(saveListener);
+        //  csvbutton.addActionListener(saveListener);
+        open.addActionListener(saveListener);
         file.add(open);
         file.add(save);
-        file.add(export);
+        // file.add(export);
 
 
 
