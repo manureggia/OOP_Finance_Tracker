@@ -20,7 +20,7 @@ public class DateCustomFilterPanel extends JPanel implements ActionListener {
         this.enddatetxt = enddatetxt;
         this.setLayout(new BorderLayout());
         JPanel row1 = new JPanel();
-        JLabel startdatelbl = new JLabel("Start Date");
+        JLabel startdatelbl = new JLabel("End Date");
         Date today = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         startdatetxt.setText(format.format(today));
@@ -29,7 +29,7 @@ public class DateCustomFilterPanel extends JPanel implements ActionListener {
         add(row1,BorderLayout.NORTH);
 
         JPanel row2 = new JPanel();
-        JLabel enddatelbl = new JLabel("End Date");
+        JLabel enddatelbl = new JLabel("Start Date");
         enddatetxt.setText(format.format(today));
         row2.add(enddatelbl);
         row2.add(enddatetxt);

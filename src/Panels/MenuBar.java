@@ -33,16 +33,12 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
         //sorting menu
         JCheckBoxMenuItem none = new JCheckBoxMenuItem("None",true);
-        JCheckBoxMenuItem week = new JCheckBoxMenuItem("Last Week");
-        JCheckBoxMenuItem month = new JCheckBoxMenuItem("Last Month");
-        JCheckBoxMenuItem year = new JCheckBoxMenuItem("Last Year");
+        JCheckBoxMenuItem byDate = new JCheckBoxMenuItem("By Date");
         ButtonGroup group = new ButtonGroup();
-        group.add(none);group.add(week);group.add(month);group.add(year);
+        group.add(none);group.add(byDate);
         none.addActionListener(this);
-        week.addActionListener(this);
-        month.addActionListener(this);
-        year.addActionListener(this);
-        sorter.add(none);sorter.add(week); sorter.add(month); sorter.add(year);
+        byDate.addActionListener(this);
+        sorter.add(none);sorter.add(byDate);
         this.add(file);
         this.add(sorter);
 
@@ -54,6 +50,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
         JMenuItem txtbutton = new JMenuItem("Text");
         SaveListener saveListener = new SaveListener(table);
         save.addActionListener(saveListener);
+        csvbutton.addActionListener(saveListener);
         open.addActionListener(saveListener);
         export.add(csvbutton);
         export.add(txtbutton);
@@ -68,15 +65,21 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JTextField start = new JTextField(25), end =  new JTextField(25);
-        int response = JOptionPane.showConfirmDialog(table,new DateCustomFilterPanel(start,end),"Custom Date Chooser",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
-        if(response == JOptionPane.OK_OPTION){
-            try {
-                filter.applyFilter(start.getText(),end.getText());
-            } catch (ParseException ex) {
-                throw new RuntimeException(ex);
+        if (e.getActionCommand().equals("None")){
+            table.setRowSorter(null);
+        }
+        if (e.getActionCommand().equals("By Date")){
+            JTextField start = new JTextField(25), end =  new JTextField(25);
+            int response = JOptionPane.showConfirmDialog(table,new DateCustomFilterPanel(start,end),"Custom Date Chooser",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+            if(response == JOptionPane.OK_OPTION){
+                try {
+                    filter.applyFilter(start.getText(),end.getText());
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
+
         BalanceTableModel model = (BalanceTableModel) table.getModel();
         model.fireTableDataChanged();
     }

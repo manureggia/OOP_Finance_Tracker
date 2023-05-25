@@ -1,5 +1,8 @@
 package Listener;
 
+import DataStructure.AbstractSaver;
+import DataStructure.BynarySave;
+import DataStructure.CsvSaveLoader;
 import DataStructure.TableModel.BalanceTableModel;
 
 import javax.swing.*;
@@ -32,6 +35,7 @@ public class SaveListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         BalanceTableModel model = (BalanceTableModel) table.getModel();
+        AbstractSaver saver;
         if(e.getActionCommand().equals("Save")){
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Save File");
@@ -44,7 +48,8 @@ public class SaveListener implements ActionListener {
                 fileChooser.setFileFilter(filter);
                 if(exitStatus == -2 || exitStatus == JOptionPane.YES_OPTION) {
                     try {
-                        model.saveFile(file);
+                        saver = new BynarySave();
+                        model.saveFile(saver, file);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -66,12 +71,35 @@ public class SaveListener implements ActionListener {
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 try {
-                    model.loadData(file);
+                    model.loadData(new BynarySave(), file);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
 
+        }
+        else if(e.getActionCommand().equals("CSV")){
+            JFileChooser fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV File (*.csv)",".csv");
+            fileChooser.setFileFilter(filter);
+            fileChooser.setDialogTitle("Export CSV");
+            int userSelection = fileChooser.showSaveDialog(null);
+            if(userSelection == JFileChooser.APPROVE_OPTION){
+                File file = fileChooser.getSelectedFile();
+                int exitStatus = checkFileExistance(file);
+                //save file
+
+                if(exitStatus == -2 || exitStatus == JOptionPane.YES_OPTION) {
+                    try {
+                        model.saveFile(new CsvSaveLoader(), file);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                } else if (exitStatus == JOptionPane.NO_OPTION) {
+                    actionPerformed(e);
+                }
+
+            }
         }
 
     }

@@ -2,8 +2,8 @@ package DataStructure;
 
 import java.io.*;
 
-public class SaverLoader {
-    public SaverLoader() {
+public class BynarySave extends AbstractSaver{
+    public BynarySave() {
     }
 
 
@@ -25,14 +25,12 @@ public class SaverLoader {
         FileInputStream stream = new FileInputStream(file);
         ObjectInputStream in = new ObjectInputStream(stream);
         try {
-            Balance b = (Balance) in.readObject();
-            return b;
+            return (Balance) in.readObject();
         } catch(ClassNotFoundException e) {
             System.err.println("Class not Found. Mabye wrong file?");
         } finally {
             stream.close();
         }
-
         return null;
     }
 }

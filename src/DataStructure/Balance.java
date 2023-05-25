@@ -11,6 +11,11 @@ import java.util.Vector;
  * The type Balance.
  */
 public class Balance implements Serializable {
+    public ArrayList<Transaction> getTransactionVector() {
+        return transactionVector;
+    }
+
+
     private ArrayList<Transaction> transactionVector;
     private double total;
 

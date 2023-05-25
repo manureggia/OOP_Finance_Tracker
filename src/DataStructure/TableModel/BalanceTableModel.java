@@ -1,13 +1,12 @@
 package DataStructure.TableModel;
 
+import DataStructure.AbstractSaver;
 import DataStructure.Balance;
-import DataStructure.SaverLoader;
+import DataStructure.BynarySave;
 import DataStructure.Transaction;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
@@ -16,12 +15,11 @@ public class BalanceTableModel extends AbstractTableModel {
 
     private Balance balance;
     private String[] columnName = {"Date", "Description", "Amount"};
-    private SaverLoader saverLoader;
+    private AbstractSaver saver;
 
 
     public BalanceTableModel(Balance balance) {
         this.balance = balance;
-        this.saverLoader = new SaverLoader();
     }
 
     @Override
@@ -75,12 +73,12 @@ public class BalanceTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void saveFile(File file) throws IOException {
-        saverLoader.saveData(balance,file);
+    public void saveFile(AbstractSaver saver, File file) throws IOException {
+        saver.saveData(balance,file);
     }
 
-    public void loadData(File file) throws IOException {
-        balance = saverLoader.loadData(file);
+    public void loadData(AbstractSaver saver, File file) throws IOException {
+        balance = saver.loadData(file);
         fireTableDataChanged();
     }
 

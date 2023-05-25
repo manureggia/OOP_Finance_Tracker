@@ -31,6 +31,19 @@ public class Transaction implements Serializable {
         formatter = new SimpleDateFormat("dd/MM/yyyy");
     }
 
+    public Transaction(String date, String description, double amount) {
+        formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.date = formatter.parse(date);
+        }catch (ParseException ex){
+            System.err.println("Errore nel parsing");
+        }
+        this.description = description;
+        this.amount = amount;
+
+    }
+
+
     /**
      * Gets date.
      *
