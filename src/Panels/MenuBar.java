@@ -1,5 +1,6 @@
 package Panels;
-import DataStructure.*;
+
+import DataStructure.FilterTable;
 import DataStructure.TableModel.BalanceTableModel;
 import Listener.SaveListener;
 
@@ -7,7 +8,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.util.Date;
 
 /**
  * The type Menu bar.
@@ -17,8 +17,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
     /**
      * The Table.
      */
-    private JTable table;
-    private JTextField totaltxt;
+    private final JTable table;
     FilterTable filter;
 
 
@@ -26,7 +25,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
     public MenuBar(JTable table, JTextField totaltxt,FilterTable filter) {
         super();
         this.table = table;
-        this.totaltxt = totaltxt;
         this.filter = filter;
         JMenu sorter = new JMenu("Filter");
         JMenu file = new JMenu("File");

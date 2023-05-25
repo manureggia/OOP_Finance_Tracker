@@ -11,14 +11,14 @@ import java.util.Date;
 
 public class DateCustomFilterPanel extends JPanel implements ActionListener {
 
-    private JTextField startdatetxt, enddatetxt;
-    private JButton daybtn, weekbtn, monthbtn, yearbtn;
+    private final JTextField startdatetxt, enddatetxt;
 
     public DateCustomFilterPanel(JTextField startdatetxt, JTextField enddatetxt) {
         super();
         this.startdatetxt = startdatetxt;
         this.enddatetxt = enddatetxt;
         this.setLayout(new BorderLayout());
+        JButton daybtn, weekbtn, monthbtn, yearbtn;
         JPanel row1 = new JPanel();
         JLabel startdatelbl = new JLabel("End Date");
         Date today = new Date();

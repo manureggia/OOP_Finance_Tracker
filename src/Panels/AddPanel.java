@@ -1,8 +1,7 @@
 package Panels;
+
 import DataStructure.TableModel.BalanceTableModel;
 import DataStructure.Transaction;
-
-import DataStructure.Balance;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,11 +16,10 @@ import java.util.Date;
  */
 public class AddPanel extends JPanel implements ActionListener {
 
-    private JButton add;
-    private JTextField datetxt, desctxt, ammtxt;
-    private SimpleDateFormat formatter;
-    private JTable table;
-    private JFrame thisframe;
+    private final JTextField datetxt, desctxt, ammtxt;
+    private final SimpleDateFormat formatter;
+    private final JTable table;
+    private final JFrame thisframe;
 
     /**
      * Instantiates a new Add panel.
@@ -34,6 +32,7 @@ public class AddPanel extends JPanel implements ActionListener {
         this.table = table;
         this.thisframe = thisframe;
         this.setLayout(new BorderLayout());
+
         formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
         JPanel row1 = new JPanel();
@@ -58,9 +57,9 @@ public class AddPanel extends JPanel implements ActionListener {
         bottom.add(row3, BorderLayout.NORTH);
 
         JPanel row4 = new JPanel();
-        add = new JButton("ADD");
-        add.addActionListener(this);
-        row4.add(add);
+        JButton addbtn = new JButton("ADD");
+        addbtn.addActionListener(this);
+        row4.add(addbtn);
         bottom.add(row4,BorderLayout.SOUTH);
         add(bottom,BorderLayout.SOUTH);
 
@@ -86,7 +85,7 @@ public class AddPanel extends JPanel implements ActionListener {
                 String formattedtxt = ammtxt.getText().replace(',','.');
                 model.insertRow(new Transaction(formatter.parse(datetxt.getText()),desctxt.getText(),Double.parseDouble(formattedtxt)));
             }catch (NumberFormatException ex){
-                System.err.println(ex);
+                throw new NumberFormatException();
             } catch (ParseException ex) {
                 datetxt.setText("Date is not valid!");
             }

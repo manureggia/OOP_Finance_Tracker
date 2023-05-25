@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class SaveListener implements ActionListener {
 
-    private JTable table;
+    private final JTable table;
 
     public SaveListener(JTable table) {
         this.table = table;

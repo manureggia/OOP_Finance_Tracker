@@ -1,11 +1,7 @@
 package DataStructure;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * The type Balance.
@@ -16,7 +12,7 @@ public class Balance implements Serializable {
     }
 
 
-    private ArrayList<Transaction> transactionVector;
+    private final ArrayList<Transaction> transactionVector;
     private double total;
 
     /**

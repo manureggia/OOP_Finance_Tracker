@@ -3,12 +3,10 @@ package Panels;
 import DataStructure.Balance;
 import DataStructure.TableModel.BalanceTableModel;
 import DataStructure.Transaction;
-import Listener.SorterListener;
 import Listener.TotalListener;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,10 +15,7 @@ import java.awt.event.ActionListener;
  * The type Main panel.
  */
 public class MainPanel extends JPanel implements ActionListener {
-    private Balance balance;
-    private JTable table;
-
-    private JTextField totaltxt;
+    private final JTable table;
 
     /**
      * Instantiates a new Main panel.
@@ -30,8 +25,6 @@ public class MainPanel extends JPanel implements ActionListener {
      */
     public MainPanel(Balance balance, JTable table, JTextField totaltxt) {
         super();
-        this.balance = balance;
-        this.totaltxt = totaltxt;
         this.setLayout(new BorderLayout());
         //creation of the table and the table model
         this.table = table;

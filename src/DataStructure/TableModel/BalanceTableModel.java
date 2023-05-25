@@ -2,7 +2,6 @@ package DataStructure.TableModel;
 
 import DataStructure.AbstractSaver;
 import DataStructure.Balance;
-import DataStructure.BynarySave;
 import DataStructure.Transaction;
 
 import javax.swing.table.AbstractTableModel;
@@ -14,8 +13,7 @@ import java.util.Date;
 public class BalanceTableModel extends AbstractTableModel {
 
     private Balance balance;
-    private String[] columnName = {"Date", "Description", "Amount"};
-    private AbstractSaver saver;
+    private final String[] columnName = {"Date", "Description", "Amount"};
 
 
     public BalanceTableModel(Balance balance) {
@@ -35,16 +33,12 @@ public class BalanceTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Transaction tran = balance.getElementAt(rowIndex);
-        switch (columnIndex){
-            case 0:
-                return tran.getStringDate();
-            case 1:
-                return tran.getDescription();
-            case 2:
-                return tran.getAmount();
-            default:
-                throw new IllegalStateException("Unexpected value: " + columnIndex);
-        }
+        return switch (columnIndex) {
+            case 0 -> tran.getStringDate();
+            case 1 -> tran.getDescription();
+            case 2 -> tran.getAmount();
+            default -> throw new IllegalStateException("Unexpected value: " + columnIndex);
+        };
     }
 
     @Override

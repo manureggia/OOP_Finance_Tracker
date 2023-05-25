@@ -9,18 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * The type Modify panel.
  */
 public class ModifyPanel extends JPanel implements ActionListener {
-    private JButton add;
-    private JTextField datetxt, desctxt, ammtxt;
-    private SimpleDateFormat formatter;
-    private JTable table;
-    private Transaction transaction;
-    private JFrame thisframe;
+    private final JTextField datetxt, desctxt, ammtxt;
+    private final SimpleDateFormat formatter;
+    private final JTable table;
+    private final Transaction transaction;
+    private final JFrame thisframe;
 
 
     /**
@@ -60,7 +58,7 @@ public class ModifyPanel extends JPanel implements ActionListener {
         bottom.add(row3, BorderLayout.NORTH);
 
         JPanel row4 = new JPanel();
-        add = new JButton("ADD");
+        JButton add = new JButton("ADD");
         add.addActionListener(this);
         row4.add(add);
         bottom.add(row4,BorderLayout.SOUTH);
