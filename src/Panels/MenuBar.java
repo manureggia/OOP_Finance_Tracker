@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  * The type Menu bar.
@@ -20,35 +21,35 @@ public class MenuBar extends JMenuBar implements ActionListener {
     private final JTable table;
     FilterTable filter;
 
+    SearchPanel searchPanel;
 
 
-    public MenuBar(JTable table, JTextField totaltxt,FilterTable filter) {
+
+    public MenuBar(JTable table, SearchPanel searchPanel,FilterTable filter) {
         super();
         this.table = table;
         this.filter = filter;
+        this.searchPanel = searchPanel;
         JMenu sorter = new JMenu("Filter");
         JMenu file = new JMenu("File");
 
         //sorting menu
         JCheckBoxMenuItem none = new JCheckBoxMenuItem("None",true);
         JCheckBoxMenuItem byDate = new JCheckBoxMenuItem("By Date");
+        JCheckBoxMenuItem search = new JCheckBoxMenuItem("Search");
         ButtonGroup group = new ButtonGroup();
-        group.add(none);group.add(byDate);
+        group.add(none);group.add(byDate);group.add(search);
         none.addActionListener(this);
         byDate.addActionListener(this);
-        sorter.add(none);sorter.add(byDate);
+        search.addActionListener(this);
+        sorter.add(none);sorter.add(byDate);sorter.add(search);
         this.add(file);
         this.add(sorter);
 
         //file menu
         JMenuItem open = new JMenuItem("Open");
         JMenuItem save = new JMenuItem("Save");
-        /* JMenu export = new JMenu("Export");
-        JMenuItem csvbutton = new JMenuItem("CSV");
-        JMenuItem txtbutton = new JMenuItem("Text");
-        export.add(csvbutton);
-        export.add(txtbutton);
-        JMenu importmenu = new JMenu("Import"); */
+
 
 
         SaveListener saveListener = new SaveListener(table);
@@ -68,6 +69,12 @@ public class MenuBar extends JMenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("None")){
             table.setRowSorter(null);
+            searchPanel.setVisible(false);
+            searchPanel.getSearchBar().setText("");
+            ArrayList<RowFilter<Object, Object>> filters = searchPanel.getFilters();
+            filters.set(1,RowFilter.regexFilter(""));
+            filters.set(2,RowFilter.regexFilter(""));
+
         }
         if (e.getActionCommand().equals("By Date")){
             JTextField start = new JTextField(25), end =  new JTextField(25);
@@ -79,6 +86,9 @@ public class MenuBar extends JMenuBar implements ActionListener {
                     throw new RuntimeException(ex);
                 }
             }
+        }
+        if(e.getActionCommand().equals("Search")){
+            searchPanel.setVisible(true);
         }
 
         BalanceTableModel model = (BalanceTableModel) table.getModel();

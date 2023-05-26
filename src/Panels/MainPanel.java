@@ -32,7 +32,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
         //creation of a scroll pane
         JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane,BorderLayout.NORTH);
+        add(scrollPane,BorderLayout.CENTER);
 
         JPanel buttons = new JPanel();
         JButton deletebutton = new JButton("Delete");
@@ -47,8 +47,10 @@ public class MainPanel extends JPanel implements ActionListener {
         totaltxt.setText("Total: "+balance.getTotal());
         totaltxt.setEditable(false);
         model.addTableModelListener(new TotalListener(totaltxt,table));
-        add(totaltxt, BorderLayout.CENTER);
-        add(buttons, BorderLayout.SOUTH);
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(totaltxt, BorderLayout.CENTER);
+        bottomPanel.add(buttons, BorderLayout.SOUTH);
+        add(bottomPanel,BorderLayout.SOUTH);
     }
 
     @Override

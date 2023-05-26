@@ -29,7 +29,7 @@ public class SaveListener implements ActionListener {
         File listfile = new File(path);
         for(String filename: Objects.requireNonNull(listfile.list())){
             if (filename.equals(file.getName())){
-                return JOptionPane.showConfirmDialog(table, "the file "+filename+" already exists, do you want to overwrite it?","Overwrite",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+                return JOptionPane.showConfirmDialog(table, filename+" already exists, do you want to overwrite it?","Overwrite",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
             }
         }
         return -2;
@@ -48,8 +48,6 @@ public class SaveListener implements ActionListener {
         fileChooser.addChoosableFileFilter(text);
         fileChooser.setDialogTitle(e.getActionCommand()+" File");
         // set Default option for export or simply save
-
-
         switch (e.getActionCommand()){
             case "open" -> fileChooser.setFileFilter(binary);
             case "CSV" -> fileChooser.setFileFilter(csv);
@@ -64,30 +62,32 @@ public class SaveListener implements ActionListener {
         // Save and Export
         if (userSelection == JFileChooser.APPROVE_OPTION && e.getActionCommand().equals("Save")) {
             File file = fileChooser.getSelectedFile();
+            String extension = "";
+            String filterDescr = fileChooser.getFileFilter().getDescription();
+            String filePath = file.getAbsolutePath();
+
+            if(filterDescr.equals("Binary File (*.bin)") || filePath.endsWith("bin")){
+                saver = new BynarySave();
+                extension = ".bin";
+            }
+            else if (filterDescr.equals("CSV File (*.csv)") || filePath.endsWith("csv")){
+                saver = new CsvSaveLoader();
+                extension = ".csv";
+            }
+            else if (filterDescr.equals("Text File (*.txt)") || filePath.endsWith("txt")){
+                saver = new TabulatedSave();
+                extension = ".txt";
+            }
+            else
+                saver = new BynarySave();
+
+            if(!filePath.endsWith(extension)) {
+                file = new File(filePath + extension);
+            }
             // Check if File exists
             int exitStatus = checkFileExistance(file);
             if (exitStatus == -2 || exitStatus == JOptionPane.YES_OPTION) {
                 try {
-                    String extension = "";
-                    String filterDescr = fileChooser.getFileFilter().getDescription();
-                    String filePath = file.getAbsolutePath();
-                    if(filterDescr.equals("Binary File (*.bin)") || filePath.endsWith("bin")){
-                        saver = new BynarySave();
-                        extension = ".bin";
-                    }
-                    else if (filterDescr.equals("CSV File (*.csv)") || filePath.endsWith("csv")){
-                        saver = new CsvSaveLoader();
-                        extension = ".csv";
-                    }
-                    else if (filterDescr.equals("Text File (*.txt)") || filePath.endsWith("txt")){
-                        saver = new TabulatedSave();
-                        extension = ".txt";
-                    }
-                    else
-                        saver = new BynarySave();
-                    if(!filePath.endsWith(extension)) {
-                        file = new File(filePath + extension);
-                    }
                     lastPath = filePath.replace(file.getName(),"");
                     model.saveFile(saver, file);
                 } catch (IOException ex) {

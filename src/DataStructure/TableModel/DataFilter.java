@@ -21,6 +21,7 @@ public class DataFilter extends RowFilter<Object, Object> {
         this.endDate = endDate;
     }
 
+
     @Override
     public boolean include(Entry<?, ?> entry) {
         Date rowDate;
@@ -29,11 +30,6 @@ public class DataFilter extends RowFilter<Object, Object> {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(startDate + " "+rowDate +" " + endDate);
-        System.out.println("1° compare: " +rowDate.compareTo(startDate));
-        System.out.println("2° compare: " +rowDate.compareTo(endDate));
-        System.out.println(rowDate.compareTo(endDate) >= 0 && rowDate.compareTo(startDate) <= 0);
-
         return rowDate.compareTo(endDate) >= 0 && rowDate.compareTo(startDate) <= 0;
     }
 

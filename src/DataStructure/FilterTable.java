@@ -8,8 +8,7 @@ import javax.swing.*;
 import javax.swing.table.TableRowSorter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 /**
  * The type Filter table.
@@ -20,15 +19,17 @@ public class FilterTable {
      */
     private JTable table;
     private JTextField totaltxt;
+    private ArrayList<RowFilter<Object,Object>> otherFilters;
 
     /**
      * Instantiates a new Filter table.
      *
      * @param table the table
      */
-    public FilterTable(JTable table, JTextField totaltxt) {
+    public FilterTable(JTable table, JTextField totaltxt, ArrayList<RowFilter<Object,Object>> otherFilters) {
         this.table = table;
         this.totaltxt = totaltxt;
+        this.otherFilters = otherFilters;
     }
 
     /**
@@ -42,7 +43,8 @@ public class FilterTable {
             DataFilter dataFilter = new DataFilter(d1,d2);
             TableRowSorter<BalanceTableModel> rowFilter = new TableRowSorter<>(model);
             // set the row filter on the table sorter
-            rowFilter.setRowFilter(dataFilter);
+            otherFilters.set(0,dataFilter);
+            rowFilter.setRowFilter(RowFilter.andFilter(otherFilters));
             table.setRowSorter(rowFilter);
             rowFilter.addRowSorterListener(new SorterListener(table,totaltxt));
     }
