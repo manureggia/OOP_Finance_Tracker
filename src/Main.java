@@ -63,6 +63,7 @@ public class Main {
         mainFrame.setJMenuBar(menubar);
         mainFrame.add(mainpanel);
         mainFrame.pack();
+        mainFrame.setMinimumSize(mainFrame.getSize());
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

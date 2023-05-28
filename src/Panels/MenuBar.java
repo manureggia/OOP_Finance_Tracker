@@ -1,12 +1,12 @@
 package Panels;
 
 import DataStructure.FilterTable;
-import DataStructure.TableModel.BalanceTableModel;
 import Listener.SaveListener;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -49,16 +49,17 @@ public class MenuBar extends JMenuBar implements ActionListener {
         //file menu
         JMenuItem open = new JMenuItem("Open");
         JMenuItem save = new JMenuItem("Save");
-
+        JMenuItem print = new JMenuItem("Print");
 
 
         SaveListener saveListener = new SaveListener(table);
         save.addActionListener(saveListener);
-        //  csvbutton.addActionListener(saveListener);
         open.addActionListener(saveListener);
+        print.addActionListener(this);
         file.add(open);
         file.add(save);
-        // file.add(export);
+        file.add(print);
+
 
 
 
@@ -90,7 +91,12 @@ public class MenuBar extends JMenuBar implements ActionListener {
             searchPanel.setVisible(true);
         }
 
-        BalanceTableModel model = (BalanceTableModel) table.getModel();
-        model.fireTableDataChanged();
+        if(e.getActionCommand().equals("Print")){
+            try {
+                table.print();
+            } catch (PrinterException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }
