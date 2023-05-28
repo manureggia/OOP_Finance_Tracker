@@ -5,15 +5,12 @@ import Panels.MainPanel;
 import Panels.MenuBar;
 import Panels.SearchPanel;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.formdev.flatlaf.ui.FlatFileChooserUI;
 import com.formdev.flatlaf.util.SystemInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * The type Main.
@@ -27,7 +24,8 @@ public class Main {
             System.setProperty( "apple.awt.application.name", "Finance Tracker" );
             System.setProperty( "apple.awt.application.appearance", "system" );
         }
-       // FlatLightLaf.setup();
+        else
+            FlatLightLaf.setup();
     }
 
 

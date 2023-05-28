@@ -1,6 +1,5 @@
 package DataStructure.SaveLoad;
 
-import DataStructure.AbstractSaver;
 import DataStructure.Balance;
 import DataStructure.Transaction;
 
@@ -15,7 +14,7 @@ public class CsvSaveLoader extends AbstractSaver {
     }
 
     @Override
-    public void saveData(Balance b, File f) throws IOException {
+    public void saveData(Balance b, File f){
         Iterator<Transaction> iterator = b.getTransactionVector().iterator();
         try {
             FileWriter writer = new FileWriter(f);

@@ -1,4 +1,6 @@
-package DataStructure;
+package DataStructure.SaveLoad;
+
+import DataStructure.Balance;
 
 import java.io.File;
 import java.io.IOException;

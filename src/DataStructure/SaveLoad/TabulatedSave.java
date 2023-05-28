@@ -1,6 +1,5 @@
 package DataStructure.SaveLoad;
 
-import DataStructure.AbstractSaver;
 import DataStructure.Balance;
 import DataStructure.Transaction;
 
@@ -12,7 +11,7 @@ import java.util.Scanner;
 
 public class TabulatedSave extends AbstractSaver {
     @Override
-    public void saveData(Balance b, File f) throws IOException {
+    public void saveData(Balance b, File f){
         Iterator<Transaction> iterator = b.getTransactionVector().iterator();
         try {
             FileWriter writer = new FileWriter(f);
@@ -31,7 +30,7 @@ public class TabulatedSave extends AbstractSaver {
         Balance b = new Balance();
         Scanner reader = new Scanner(f);
         while(reader.hasNextLine()){
-            String[] riga = reader.nextLine().split(";");
+            String[] riga = reader.nextLine().split("\t");
             if(riga.length != 3) {
                 throw new RuntimeException("File non formattatto correttamente");
             }

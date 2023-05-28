@@ -11,11 +11,10 @@ import java.util.Date;
 
 public class DateCustomFilterPanel extends JPanel implements ActionListener {
 
-    private final JTextField startdatetxt, enddatetxt;
+    private final JTextField enddatetxt;
 
     public DateCustomFilterPanel(JTextField startdatetxt, JTextField enddatetxt) {
         super();
-        this.startdatetxt = startdatetxt;
         this.enddatetxt = enddatetxt;
         this.setLayout(new BorderLayout());
         JButton daybtn, weekbtn, monthbtn, yearbtn;
@@ -55,7 +54,7 @@ public class DateCustomFilterPanel extends JPanel implements ActionListener {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
         try {
-            cal.setTime(formatter.parse(startdatetxt.getText()));
+            cal.setTime(formatter.parse(enddatetxt.getText()));
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }

@@ -1,6 +1,6 @@
 package Listener;
 
-import DataStructure.AbstractSaver;
+import DataStructure.SaveLoad.AbstractSaver;
 import DataStructure.SaveLoad.BynarySave;
 import DataStructure.SaveLoad.CsvSaveLoader;
 import DataStructure.SaveLoad.TabulatedSave;
@@ -38,7 +38,7 @@ public class SaveListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         BalanceTableModel model = (BalanceTableModel) table.getModel();
-        AbstractSaver saver = null;
+        AbstractSaver saver;
         JFileChooser fileChooser = new JFileChooser(lastPath);
         FileNameExtensionFilter binary = new FileNameExtensionFilter("Binary File (*.bin)", "bin");
         FileNameExtensionFilter csv = new FileNameExtensionFilter("CSV File (*.csv)", "csv");

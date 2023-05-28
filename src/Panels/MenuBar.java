@@ -25,7 +25,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
 
 
-    public MenuBar(JTable table, SearchPanel searchPanel,FilterTable filter) {
+    public MenuBar(JTable table, SearchPanel searchPanel, FilterTable filter) {
         super();
         this.table = table;
         this.filter = filter;
@@ -63,8 +63,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
 
     }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("None")){
@@ -72,8 +70,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
             searchPanel.setVisible(false);
             searchPanel.getSearchBar().setText("");
             ArrayList<RowFilter<Object, Object>> filters = searchPanel.getFilters();
+            filters.set(0,RowFilter.regexFilter(""));
             filters.set(1,RowFilter.regexFilter(""));
-            filters.set(2,RowFilter.regexFilter(""));
 
         }
         if (e.getActionCommand().equals("By Date")){
@@ -81,6 +79,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
             int response = JOptionPane.showConfirmDialog(table,new DateCustomFilterPanel(start,end),"Custom Date Chooser",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
             if(response == JOptionPane.OK_OPTION){
                 try {
+
                     filter.applyFilter(start.getText(),end.getText());
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);

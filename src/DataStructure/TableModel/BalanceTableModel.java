@@ -1,6 +1,6 @@
 package DataStructure.TableModel;
 
-import DataStructure.AbstractSaver;
+import DataStructure.SaveLoad.AbstractSaver;
 import DataStructure.Balance;
 import DataStructure.Transaction;
 
