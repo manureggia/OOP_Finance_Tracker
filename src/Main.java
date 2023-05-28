@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 /**
- * The type Main.
+ * The class main where everything start.
  */
 public class Main {
 
@@ -30,11 +30,12 @@ public class Main {
 
 
     /**
-     * The entry point of application.
+     * Where the App starts.
+     * The main frame is created here, with the main Panel and the Menu Bar.
+     * All useful variables are initialized here, like the Balance and also other variables.
      *
      * @param args the input arguments
      */
-
     public static void main(String[] args) {
 
         try {

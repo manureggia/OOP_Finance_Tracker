@@ -9,10 +9,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * The type Date custom filter panel.
+ */
 public class DateCustomFilterPanel extends JPanel implements ActionListener {
 
     private final JTextField enddatetxt;
 
+    /**
+     * Instantiates a new Date custom filter panel.
+     *
+     * @param startdatetxt the startdatetxt
+     * @param enddatetxt   the enddatetxt
+     */
     public DateCustomFilterPanel(JTextField startdatetxt, JTextField enddatetxt) {
         super();
         this.enddatetxt = enddatetxt;
