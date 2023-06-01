@@ -4,29 +4,40 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The type Balance.
+ * La classe bilancio che gestisce un vettore di tipo {@link DataStructure.Transaction}.
  */
 public class Balance implements Serializable {
-    public ArrayList<Transaction> getTransactionVector() {
-        return transactionVector;
-    }
 
 
+    /**
+     * l'array list di tipo transazione
+     */
     private final ArrayList<Transaction> transactionVector;
+    /**
+     * il totale
+     */
     private double total;
 
     /**
-     * Instantiates a new Balance.
+     * Il costruttore del bilancio, dove viene inizializzato l'{@link ArrayList} di {@link DataStructure.Transaction}.
      */
     public Balance() {
-        transactionVector = new ArrayList<Transaction>();
+        transactionVector = new ArrayList<>();
         total = 0;
     }
 
     /**
-     * Add transaction.
+     * Restituisce il vettore di transazione
+     * @return vettore di transazioni
+     */
+    public ArrayList<Transaction> getTransactionVector() {
+        return transactionVector;
+    }
+
+    /**
+     * Aggiunge una transazione.
      *
-     * @param e the transaction
+     * @param e la transazioe da aggiungere
      */
     public synchronized void addTransaction(Transaction e){
         transactionVector.add(e);
@@ -34,9 +45,9 @@ public class Balance implements Serializable {
     }
 
     /**
-     * Remove transaction.
+     * rimuove la transazione.
      *
-     * @param e the transaction
+     * @param e la transazione da rimuovere
      */
     public synchronized  void removeTransaction(Transaction e){
         transactionVector.remove(e);
@@ -44,9 +55,9 @@ public class Balance implements Serializable {
     }
 
     /**
-     * Calc total double.
+     * calcola il totale .
      *
-     * @return the total
+     * @return il totale
      */
     public synchronized double calcTotal(){
         total = 0;
@@ -57,28 +68,28 @@ public class Balance implements Serializable {
     }
 
     /**
-     * Get total double.
+     * ritorna il valore della variabile totale.
      *
-     * @return the total
+     * @return il totale precedentemente calcolato
      */
     public double  getTotal(){
         return total;
     }
 
     /**
-     * Get size int.
+     * restituisce la dimensione del vettore di transazioni.
      *
-     * @return the int
+     * @return dimensione del vettore
      */
     public int getSize(){
         return transactionVector.size();
     }
 
     /**
-     * Get element at transaction.
+     * Restituisce una transazione ad un determinato indice.
      *
-     * @param index the index
-     * @return the transaction
+     * @param index l'indice
+     * @return la transazione
      */
     public Transaction getElementAt(int index){
         return transactionVector.get(index);

@@ -9,7 +9,17 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Salvataggio in file tabulati (separati da TAB), estende {@link DataStructure.SaveLoad.AbstractSaver}.
+ */
 public class TabulatedSave extends AbstractSaver {
+    /**
+     * Il costruttore di TabulatedSave, permette il savlataggio in file di tipo testuale
+     * ogni voce è serparata da un tab.
+     */
+    public TabulatedSave() {
+    }
+
     @Override
     public void saveData(Balance b, File f){
         Iterator<Transaction> iterator = b.getTransactionVector().iterator();

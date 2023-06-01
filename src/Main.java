@@ -13,7 +13,11 @@ import java.util.ArrayList;
 
 
 /**
- * The class main where everything start.
+ * La classe main, dove il programma è inizializzato.
+ * Per far partire il programma da linea di comando è necessario includere la classe Flatlaf nel seguente modo:
+ * javac -classpath "./Lib/flatlaf-3.1.1.jar:" Main.java
+ * per farlo partire invece
+ * java -classpath "./Lib/flatlaf-3.1.1.jar:" Main
  */
 public class Main {
 
@@ -30,11 +34,9 @@ public class Main {
 
 
     /**
-     * Where the App starts.
-     * The main frame is created here, with the main Panel and the Menu Bar.
-     * All useful variables are initialized here, like the Balance and also other variables.
+     * Questo è il main dove il frame principale insieme al suo pannello e alla barra superiore vengono creati
      *
-     * @param args the input arguments
+     * @param args gli argomenti di input
      */
     public static void main(String[] args) {
 

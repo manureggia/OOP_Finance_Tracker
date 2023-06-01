@@ -9,7 +9,14 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Salvataggio in CSV, estende {@link DataStructure.SaveLoad.AbstractSaver}.
+ */
 public class CsvSaveLoader extends AbstractSaver {
+    /**
+     * Costruttore del CsvSaverLoader, permette l'esportazzione del bilancio in file di tipo csv.
+     * ogni voce di bilancio è separata da un ;
+     */
     public CsvSaveLoader() {
     }
 

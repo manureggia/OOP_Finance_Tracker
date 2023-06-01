@@ -4,7 +4,14 @@ import DataStructure.Balance;
 
 import java.io.*;
 
+/**
+ * Salvataggio di tipo binario, estende {@link DataStructure.SaveLoad.AbstractSaver}.
+ */
 public class BynarySave extends AbstractSaver {
+
+    /**
+     * Costruttore del Bynarysave Sovrascrive il saveData e il loadData per scrivere in binario su un file.
+     */
     public BynarySave() {
     }
 
