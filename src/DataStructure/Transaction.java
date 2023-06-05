@@ -8,21 +8,33 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * The type Transaction.
+ * La transazione, tiene conto di Data Ammontare e Descrizione.
  */
 public class Transaction implements Serializable {
-
+    /**
+     * la data della transazione
+     */
     private Date date;
+    /**
+     * la descrizione della transazioe
+     */
     private String description;
+    /**
+     * l'ammontare della transazione che può essere positivo o negativo
+     */
     private double amount;
-    private SimpleDateFormat formatter;
+    /**
+     * Formattatore per la data
+     */
+    private final SimpleDateFormat formatter;
 
     /**
-     * Instantiates a new Transaction.
+     * Costruttore per la transazione.
+     * si passano i parametri e viene creato una transazione
      *
-     * @param date        the date
-     * @param description the description
-     * @param amount      the amount
+     * @param date        la data
+     * @param description la descrizione
+     * @param amount      l'ammontare posivo o negtativo
      */
     public Transaction(Date date, String description, double amount) {
         this.date = date;
@@ -30,7 +42,14 @@ public class Transaction implements Serializable {
         this.amount = amount;
         formatter = new SimpleDateFormat("dd/MM/yyyy");
     }
-
+    /**
+     * Costruttore per la transazione.
+     * si passano i parametri e viene creato una transazione
+     *
+     * @param date        la data in stringa
+     * @param description la descrizione
+     * @param amount      l'ammontare posivo o negtativo
+     */
     public Transaction(String date, String description, double amount) {
         formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -45,63 +64,63 @@ public class Transaction implements Serializable {
 
 
     /**
-     * Gets date.
+     * restituice la data.
      *
-     * @return the date
+     * @return date
      */
     public synchronized Date getDate() {
         return date;
     }
 
     /**
-     * Gets string date.
+     * restituisce la stringa della data.
      *
-     * @return the string date
+     * @return data in formato stringa
      */
     public synchronized String getStringDate() {
         return formatter.format(date);
     }
 
     /**
-     * Sets date.
+     * assegna un valore alla data.
      *
-     * @param date the date
+     * @param date la data
      */
     public synchronized void setDate(Date date) {
         this.date = date;
     }
 
     /**
-     * Gets description.
+     * restituisce la descrizione.
      *
-     * @return the description
+     * @return stringa contentente la descrizione
      */
     public synchronized String getDescription() {
         return description;
     }
 
     /**
-     * Sets description.
+     * assegna una descrizione.
      *
-     * @param description the description
+     * @param description stringa contentente la descrizione
      */
     public synchronized void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * Gets amount.
+     * restituisce l'ammontare.
      *
-     * @return the amount
+     * @return Double dell'ammontare
      */
     public synchronized double getAmount() {
         return amount;
     }
 
     /**
-     * Sets amount.
+     * assegna l'ammontare.
      *
-     * @param amount the amount
+     * @param amount double dell'ammontare
      */
     public synchronized void setAmount(double amount) {
         this.amount = amount;
