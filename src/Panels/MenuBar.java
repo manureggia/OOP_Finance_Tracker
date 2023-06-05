@@ -1,13 +1,17 @@
 package Panels;
 
-import DataStructure.FilterTable;
+import DataStructure.TableModel.BalanceTableModel;
+import DataStructure.TableModel.DataFilter;
 import Listener.SaveListener;
+import Listener.SorterListener;
 
 import javax.swing.*;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -19,17 +23,19 @@ public class MenuBar extends JMenuBar implements ActionListener {
      * The Table.
      */
     private final JTable table;
-    FilterTable filter;
+    private final ArrayList<RowFilter<Object,Object>> otherFilters;
+    private final JTextField totaltxt;
 
-    SearchPanel searchPanel;
+    private final SearchPanel searchPanel;
 
 
 
-    public MenuBar(JTable table, SearchPanel searchPanel, FilterTable filter) {
+    public MenuBar(JTable table, SearchPanel searchPanel, ArrayList<RowFilter<Object,Object>> otherFilters, JTextField totaltxt) {
         super();
         this.table = table;
-        this.filter = filter;
+        this.otherFilters = otherFilters;
         this.searchPanel = searchPanel;
+        this.totaltxt =  totaltxt;
         JMenu sorter = new JMenu("Filter");
         JMenu file = new JMenu("File");
 
@@ -79,12 +85,21 @@ public class MenuBar extends JMenuBar implements ActionListener {
             JTextField start = new JTextField(25), end =  new JTextField(25);
             int response = JOptionPane.showConfirmDialog(table,new DateCustomFilterPanel(start,end),"Custom Date Chooser",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
             if(response == JOptionPane.OK_OPTION){
+                BalanceTableModel model = (BalanceTableModel) table.getModel();
+                // create a row filter to show only dates after the filter date
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 try {
-
-                    filter.applyFilter(start.getText(),end.getText());
+                    DataFilter dataFilter = new DataFilter(format.parse(start.getText()),format.parse(end.getText()));
+                    otherFilters.set(0,dataFilter);
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
                 }
+                TableRowSorter<BalanceTableModel> rowFilter = new TableRowSorter<>(model);
+                // set the row filter on the table sorter
+                rowFilter.setRowFilter(RowFilter.andFilter(otherFilters));
+                table.setRowSorter(rowFilter);
+                rowFilter.addRowSorterListener(new SorterListener(table,totaltxt));
+
             }
         }
         if(e.getActionCommand().equals("Search")){

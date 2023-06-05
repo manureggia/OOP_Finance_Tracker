@@ -1,5 +1,4 @@
 import DataStructure.Balance;
-import DataStructure.FilterTable;
 import DataStructure.TableModel.BalanceTableModel;
 import Panels.MainPanel;
 import Panels.MenuBar;
@@ -59,8 +58,7 @@ public class Main {
         MainPanel mainpanel = new MainPanel(balance,table,totaltxt);
         mainpanel.add(searchPanel, BorderLayout.NORTH);
         searchPanel.setVisible(false);
-        FilterTable filter = new FilterTable(table,totaltxt,otherFilters);
-        MenuBar menubar = new MenuBar(table,searchPanel,filter);
+        MenuBar menubar = new MenuBar(table,searchPanel,otherFilters, totaltxt);
 
         //GUI FRAME
         mainFrame.setJMenuBar(menubar);
