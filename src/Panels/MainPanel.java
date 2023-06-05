@@ -12,13 +12,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The type Main panel.
+ * Il Pannello principale, dove tutti gli elementi principali sono visualizzati.
  */
 public class MainPanel extends JPanel implements ActionListener {
     private final JTable table;
 
     /**
-     * Instantiates a new Main panel.
+     * Inizializzazione del pannello principale.
+     * Qui viene visualizzata la tabella e i bottoni che servono per interagire con essa: REMOVE MODIFY ADD
+     * Questi bottoni sono gestiti dall'ActionListener che attraverso (se necessari) altri pannelli permette l'inserimento
+     * la modifica e la rimozione di elementi dalla tabella. La rimozione è possibile oltretutto per più elementi contemporaneamente
      *
      * @param balance the balance
      * @param table   the table
@@ -87,8 +90,6 @@ public class MainPanel extends JPanel implements ActionListener {
                     model.deleteElementAt(sorter.convertRowIndexToModel(selectedRows[i]));
                 }
             }
-
-            //model.deleteElementAt(table.getSelectedRow());
         }
     }
 }

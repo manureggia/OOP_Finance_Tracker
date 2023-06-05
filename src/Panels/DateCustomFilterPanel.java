@@ -10,17 +10,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * The type Date custom filter panel.
+ * La classe DateCustomFilterPanel implementa un pannello che permette il filtraggio delle date in maniera semplice.
  */
 public class DateCustomFilterPanel extends JPanel implements ActionListener {
 
     private final JTextField enddatetxt;
 
     /**
-     * Instantiates a new Date custom filter panel.
+     * Inizializzazione del pannello di filtraggio delle date.
+     * In questo pannello l'utente sceglie un range di date che starà fra startdatetxt e enddatetxt e poi verrà filtrato
+     * dall'action listener presente all'interno del {@link MenuBar}
      *
-     * @param startdatetxt the startdatetxt
-     * @param enddatetxt   the enddatetxt
+     * @param startdatetxt la data che è l'estremo superiore
+     * @param enddatetxt   la data di estremo inferiore
      */
     public DateCustomFilterPanel(JTextField startdatetxt, JTextField enddatetxt) {
         super();

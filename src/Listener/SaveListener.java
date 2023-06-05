@@ -1,7 +1,7 @@
 package Listener;
 
 import DataStructure.SaveLoad.AbstractSaver;
-import DataStructure.SaveLoad.BynarySave;
+import DataStructure.SaveLoad.BinarySave;
 import DataStructure.SaveLoad.CsvSaveLoader;
 import DataStructure.SaveLoad.TabulatedSave;
 import DataStructure.TableModel.BalanceTableModel;
@@ -15,11 +15,21 @@ import java.io.IOException;
 import java.io.StreamCorruptedException;
 import java.util.Objects;
 
+/**
+ * La classe SaveListener, è un Listener che implementa il salvataggio e il caricamento da file.
+ * È implementata direttamente l'esportazione e l'importazione di file .csv e .txt in nel formato richiesto
+ */
 public class SaveListener implements ActionListener {
 
     private final JTable table;
     private String lastPath;
 
+    /**
+     * Instanzia un nuovo oggetto SaveListener passando la tablella in modo da riuscire a prendere
+     * il TableModel nel quale sono prensenti i dati.
+     *
+     * @param table la tabella
+     */
     public SaveListener(JTable table) {
         this.table = table;
     }
@@ -67,7 +77,7 @@ public class SaveListener implements ActionListener {
             String filePath = file.getAbsolutePath();
 
             if(filterDescr.equals("Binary File (*.bin)") || filePath.endsWith("bin")){
-                saver = new BynarySave();
+                saver = new BinarySave();
                 extension = ".bin";
             }
             else if (filterDescr.equals("CSV File (*.csv)") || filePath.endsWith("csv")){
@@ -79,7 +89,7 @@ public class SaveListener implements ActionListener {
                 extension = ".txt";
             }
             else
-                saver = new BynarySave();
+                saver = new BinarySave();
 
             if(!filePath.endsWith(extension)) {
                 file = new File(filePath + extension);
@@ -104,13 +114,13 @@ public class SaveListener implements ActionListener {
                 String filePath = file.getAbsolutePath();
                 String filterDescr = fileChooser.getFileFilter().getDescription();
                 if(filterDescr.equals("Binary File (*.bin)") || filePath.endsWith("bin"))
-                    saver = new BynarySave();
+                    saver = new BinarySave();
                 else if (filterDescr.equals("CSV File (*.csv)") || filePath.endsWith("csv"))
                     saver = new CsvSaveLoader();
                 else if (filterDescr.equals("Text File (*.txt)") || filePath.endsWith("txt"))
                     saver = new TabulatedSave();
                 else
-                    saver = new BynarySave();
+                    saver = new BinarySave();
                 model.loadData(saver, file);
                 lastPath = filePath.replace(file.getName(),"");
             } catch (StreamCorruptedException ex){

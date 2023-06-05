@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
- * The type Modify panel.
+ * Il pannello di modifica che permette la modifica di una transazione selezionata.
  */
 public class ModifyPanel extends JPanel implements ActionListener {
     private final JTextField datetxt, desctxt, ammtxt;
@@ -22,7 +22,9 @@ public class ModifyPanel extends JPanel implements ActionListener {
 
 
     /**
-     * Instantiates a new Modify panel.
+     * Inizializzazione di un pannello di modifica.
+     * Layaout uguale al pannello di Aggiunta, permette selezionando dal {@link MainPanel} il bottone Modify con una
+     * transazione selezionata e la fa vedere nelle apposite celle per poter essere modificate.
      *
      * @param table       the table
      * @param transaction the transaction
@@ -83,7 +85,7 @@ public class ModifyPanel extends JPanel implements ActionListener {
                 BalanceTableModel model = (BalanceTableModel) table.getModel();
                 model.modifyRow(transaction, formatter.parse(datetxt.getText()),desctxt.getText() ,Double.parseDouble(formattedtxt));
             } catch (NumberFormatException ex) {
-                System.err.println(ex);
+                ammtxt.setText("Error!");
             } catch (ParseException ex) {
                 datetxt.setText("Date is not valid!");
             }

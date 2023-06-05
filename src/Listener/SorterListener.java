@@ -8,11 +8,22 @@ import javax.swing.event.RowSorterEvent;
 import javax.swing.event.RowSorterListener;
 import javax.swing.table.TableModel;
 
+/**
+ * La classe SorterListener che implementa {@link RowSorterListener}.
+ */
 public class SorterListener implements RowSorterListener {
 
-    JTable table;
-    JTextField totaltxt;
+    private final JTable table;
+    private final JTextField totaltxt;
 
+    /**
+     * Inizializza un oggetto di tipo SorterListener.
+     * Quando la tabella cambia per via di un filtro l'evento viene scatenato e il totale viene ricalcolato solo per gli
+     * elementi che sono visualizzabili e scritto nella casella apposita
+     *
+     * @param table    La tabella
+     * @param totaltxt Il field del totale
+     */
     public SorterListener(JTable table, JTextField totaltxt) {
         this.table = table;
         this.totaltxt = totaltxt;

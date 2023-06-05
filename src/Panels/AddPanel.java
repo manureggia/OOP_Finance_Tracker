@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * The Add panel, here a simple add Panel is created for simply adding a Transaction to the Balance.
+ * L'Add panel, qui un semplice pannello è creato per l'aggiunta di una transazione al bilancio
  */
 public class AddPanel extends JPanel implements ActionListener {
 
@@ -22,10 +22,12 @@ public class AddPanel extends JPanel implements ActionListener {
     private final JFrame thisframe;
 
     /**
-     * Instantiates a new Add panel.
+     * Creazione di un nuovo pannello di tipo ADD.
+     * In questo pannello è anche gestita la pressione del tasto ADD. dopo aver controllato la correttezza dei dati
+     * inseriti (e nel caso comunicati all'utente) aggiunge la transazione al bilancio.
      *
-     * @param table     the main Table, where the Transaction will be added
-     * @param thisframe the Add Frame, this is used to close this frame after adding a Transaction
+     * @param table     La tabella in cui verrà aggiunta la transazione
+     * @param thisframe il Frame in cui il pannello è visibile
      */
     public AddPanel(JTable table, JFrame thisframe){
         super();

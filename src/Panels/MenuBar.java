@@ -15,21 +15,26 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
- * The type Menu bar.
+ * La classe MenuBar che mette a disposizione la barra superiore nella quale sono disponibili diverse opzioni.
  */
 public class MenuBar extends JMenuBar implements ActionListener {
-
-    /**
-     * The Table.
-     */
     private final JTable table;
     private final ArrayList<RowFilter<Object,Object>> otherFilters;
     private final JTextField totaltxt;
-
     private final SearchPanel searchPanel;
 
 
-
+    /**
+     * Inizializza una nuova menu bar.
+     * Questa Menu Bar mette a disposizione due sottomenu principali: <br>
+     * File: che contiene apertura, salvataggio di/su file e stampa della tabella <br>
+     * Filter: che permette il filtraggio della tabella in base alla data o alla ricerca, oppure la disattivazione di tutti i filtri
+     *
+     * @param table        La tabella
+     * @param searchPanel  il pannello di ricerca (nascosto o meno in base alla selezione del filtro)
+     * @param otherFilters Array contenente i filtri di data e search
+     * @param totaltxt     Il field del totale
+     */
     public MenuBar(JTable table, SearchPanel searchPanel, ArrayList<RowFilter<Object,Object>> otherFilters, JTextField totaltxt) {
         super();
         this.table = table;
@@ -76,9 +81,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
             table.setRowSorter(null);
             searchPanel.setVisible(false);
             searchPanel.getSearchBar().setText("");
-            ArrayList<RowFilter<Object, Object>> filters = searchPanel.getFilters();
-            filters.set(0,RowFilter.regexFilter(""));
-            filters.set(1,RowFilter.regexFilter(""));
+            otherFilters.set(0,RowFilter.regexFilter(""));
+            otherFilters.set(1,RowFilter.regexFilter(""));
 
         }
         if (e.getActionCommand().equals("By Date")){
