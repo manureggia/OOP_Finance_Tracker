@@ -23,8 +23,9 @@ public class MainPanel extends JPanel implements ActionListener {
      * Questi bottoni sono gestiti dall'ActionListener che attraverso (se necessari) altri pannelli permette l'inserimento
      * la modifica e la rimozione di elementi dalla tabella. La rimozione è possibile oltretutto per più elementi contemporaneamente
      *
-     * @param balance the balance
-     * @param table   the table
+     * @param balance il bilancio
+     * @param table   la tabella
+     * @param totaltxt il totale
      */
     public MainPanel(Balance balance, JTable table, JTextField totaltxt) {
         super();

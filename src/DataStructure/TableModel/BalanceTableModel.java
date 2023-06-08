@@ -135,4 +135,7 @@ public class BalanceTableModel extends AbstractTableModel {
     public double getCalTotal(){
         return balance.calcTotal();
     }
+    public Balance getBalance(){
+        return this.balance;
+    }
 }

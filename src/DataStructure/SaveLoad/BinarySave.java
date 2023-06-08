@@ -13,8 +13,8 @@ public class BinarySave extends AbstractSaver {
      * Costruttore del Bynarysave Sovrascrive il saveData e il loadData per scrivere in binario su un file.
      */
     public BinarySave() {
-    }
 
+    }
 
     public void saveData(Balance balance, File file) throws IOException {
         FileOutputStream stream = new FileOutputStream(file);
@@ -32,7 +32,7 @@ public class BinarySave extends AbstractSaver {
         FileInputStream stream = new FileInputStream(file);
         try (stream) {
             ObjectInputStream in = new ObjectInputStream(stream);
-            return (Balance) in.readObject();
+                return (Balance) in.readObject();
         } catch (ClassNotFoundException e) {
             System.err.println("Class not Found. Mabye wrong file?");
         }

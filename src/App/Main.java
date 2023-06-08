@@ -1,3 +1,5 @@
+package App;
+
 import DataStructure.Balance;
 import DataStructure.TableModel.BalanceTableModel;
 import Panels.MainPanel;
@@ -9,14 +11,15 @@ import com.formdev.flatlaf.util.SystemInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Timer;
 
 
 /**
  * La classe main, dove il programma è inizializzato.
  * Per far partire il programma da linea di comando è necessario includere la classe Flatlaf nel seguente modo:
- * javac -classpath "./Lib/flatlaf-3.1.1.jar:" Main.java
+ * javac -classpath "./App.Lib/flatlaf-3.1.1.jar:" App.Main.java
  * per farlo partire invece
- * java -classpath "./Lib/flatlaf-3.1.1.jar:" Main
+ * java -classpath "./App.Lib/flatlaf-3.1.1.jar:" App.Main
  */
 public class Main {
 
@@ -25,7 +28,7 @@ public class Main {
         if(SystemInfo.isMacOS){
             System.setProperty( "apple.laf.useScreenMenuBar", "true" );
             System.setProperty( "apple.awt.application.name", "Finance Tracker" );
-            System.setProperty( "apple.awt.application.appearance", "system" );
+            //System.setProperty( "apple.awt.application.appearance", "system" );
         }
         else
             FlatLightLaf.setup();
@@ -68,5 +71,11 @@ public class Main {
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+        //init for thread
+
+        Timer timer = new Timer();
+        AutosaveTask autosave = new AutosaveTask(table);
+        timer.schedule(autosave,0,300000);
     }
 }

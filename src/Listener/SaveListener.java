@@ -121,7 +121,9 @@ public class SaveListener implements ActionListener {
                     saver = new TabulatedSave();
                 else
                     saver = new BinarySave();
-                model.loadData(saver, file);
+                synchronized (model.getBalance()){
+                    model.loadData(saver, file);
+                }
                 lastPath = filePath.replace(file.getName(),"");
             } catch (StreamCorruptedException ex){
                 JOptionPane.showConfirmDialog(fileChooser,"Wrong file type!","Error!",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
