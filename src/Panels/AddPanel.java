@@ -19,7 +19,7 @@ public class AddPanel extends JPanel implements ActionListener {
     private final JTextField datetxt, desctxt, ammtxt;
     private final SimpleDateFormat formatter;
     private final JTable table;
-    private final JFrame thisframe;
+    private final JDialog thisframe;
 
     /**
      * Creazione di un nuovo pannello di tipo ADD.
@@ -29,7 +29,7 @@ public class AddPanel extends JPanel implements ActionListener {
      * @param table     La tabella in cui verrà aggiunta la transazione
      * @param thisframe il Frame in cui il pannello è visibile
      */
-    public AddPanel(JTable table, JFrame thisframe){
+    public AddPanel(JTable table, JDialog thisframe){
         super();
         this.table = table;
         this.thisframe = thisframe;

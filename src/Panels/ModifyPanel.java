@@ -18,7 +18,7 @@ public class ModifyPanel extends JPanel implements ActionListener {
     private final SimpleDateFormat formatter;
     private final JTable table;
     private final Transaction transaction;
-    private final JFrame thisframe;
+    private final JDialog thisframe;
 
 
     /**
@@ -30,7 +30,7 @@ public class ModifyPanel extends JPanel implements ActionListener {
      * @param transaction the transaction
      * @param thisframe   the thisframe
      */
-    public ModifyPanel(JTable table, Transaction transaction, JFrame thisframe) {
+    public ModifyPanel(JTable table, Transaction transaction, JDialog thisframe) {
         this.table = table;
         this.transaction = transaction;
         this.thisframe = thisframe;
@@ -60,7 +60,7 @@ public class ModifyPanel extends JPanel implements ActionListener {
         bottom.add(row3, BorderLayout.NORTH);
 
         JPanel row4 = new JPanel();
-        JButton add = new JButton("ADD");
+        JButton add = new JButton("Modify");
         add.addActionListener(this);
         row4.add(add);
         bottom.add(row4,BorderLayout.SOUTH);

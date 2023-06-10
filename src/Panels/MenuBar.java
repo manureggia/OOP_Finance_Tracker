@@ -2,6 +2,7 @@ package Panels;
 
 import DataStructure.TableModel.BalanceTableModel;
 import DataStructure.TableModel.DataFilter;
+import Listener.AutosaveListener;
 import Listener.SaveListener;
 import Listener.SorterListener;
 
@@ -61,14 +62,17 @@ public class MenuBar extends JMenuBar implements ActionListener {
         JMenuItem open = new JMenuItem("Open");
         JMenuItem save = new JMenuItem("Save");
         JMenuItem print = new JMenuItem("Print");
+        JCheckBoxMenuItem autosave = new JCheckBoxMenuItem("Autosave");
 
 
         SaveListener saveListener = new SaveListener(table);
+        autosave.addActionListener(new AutosaveListener(table));
         save.addActionListener(saveListener);
         open.addActionListener(saveListener);
         print.addActionListener(this);
         file.add(open);
         file.add(save);
+        file.add(autosave);
         file.add(print);
 
 

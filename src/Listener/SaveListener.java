@@ -99,7 +99,9 @@ public class SaveListener implements ActionListener {
             if (exitStatus == -2 || exitStatus == JOptionPane.YES_OPTION) {
                 try {
                     lastPath = filePath.replace(file.getName(),"");
-                    model.saveFile(saver, file);
+                    synchronized (model.getBalance()){
+                        model.saveFile(saver, file);
+                    }
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

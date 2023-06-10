@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
  */
 public class MainPanel extends JPanel implements ActionListener {
     private final JTable table;
+    private final JFrame parentFrame;
 
     /**
      * Inizializzazione del pannello principale.
@@ -27,11 +28,12 @@ public class MainPanel extends JPanel implements ActionListener {
      * @param table   la tabella
      * @param totaltxt il totale
      */
-    public MainPanel(Balance balance, JTable table, JTextField totaltxt) {
+    public MainPanel(Balance balance, JTable table, JTextField totaltxt, JFrame frame) {
         super();
         this.setLayout(new BorderLayout());
         //creation of the table and the table model
         this.table = table;
+        this.parentFrame = frame;
         BalanceTableModel model = (BalanceTableModel) table.getModel();
 
         //creation of a scroll pane
@@ -62,10 +64,12 @@ public class MainPanel extends JPanel implements ActionListener {
         RowSorter<? extends TableModel> sorter = table.getRowSorter();
         BalanceTableModel model = (BalanceTableModel) table.getModel();
         if(e.getActionCommand().equals("Insert")){
-            JFrame addFrame = new JFrame("Insert");
+            JDialog addFrame = new JDialog(parentFrame, "Insert");
             AddPanel addpanel = new AddPanel(table, addFrame);
+            addFrame.setLocation(parentFrame.getLocation());
             addFrame.add(addpanel);
             addFrame.pack();
+            addFrame.setResizable(false);
             addFrame.setVisible(true);
         } else if (e.getActionCommand().equals("Modify")) {
             Transaction t;
@@ -74,10 +78,12 @@ public class MainPanel extends JPanel implements ActionListener {
             } else {
                 t = model.getElementAt(sorter.convertRowIndexToModel(table.getSelectedRow()));
             }
-            JFrame modFrame = new JFrame("Modify");
+            JDialog modFrame = new JDialog(parentFrame,"Modify",true);
             ModifyPanel modifyPanel = new ModifyPanel(table,t,modFrame);
+            modFrame.setLocation(parentFrame.getLocation());
             modFrame.add(modifyPanel);
             modFrame.pack();
+            modFrame.setResizable(false);
             modFrame.setVisible(true);
         }else {
             int[] selectedRows = table.getSelectedRows();

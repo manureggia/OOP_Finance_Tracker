@@ -11,7 +11,7 @@ import com.formdev.flatlaf.util.SystemInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Timer;
+
 
 
 /**
@@ -58,7 +58,7 @@ public class Main {
         JTable table = new JTable(model);
         JTextField totaltxt = new JTextField();
         SearchPanel searchPanel = new SearchPanel(table,otherFilters);
-        MainPanel mainpanel = new MainPanel(balance,table,totaltxt);
+        MainPanel mainpanel = new MainPanel(balance,table,totaltxt,mainFrame);
         mainpanel.add(searchPanel, BorderLayout.NORTH);
         searchPanel.setVisible(false);
         MenuBar menubar = new MenuBar(table,searchPanel,otherFilters, totaltxt);
@@ -72,10 +72,8 @@ public class Main {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        //init for thread
 
-        Timer timer = new Timer();
-        AutosaveTask autosave = new AutosaveTask(table);
-        timer.schedule(autosave,0,300000);
+
+
     }
 }
