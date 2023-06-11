@@ -1,5 +1,3 @@
-package App;
-
 import DataStructure.Balance;
 import DataStructure.TableModel.BalanceTableModel;
 import Panels.MainPanel;
@@ -17,9 +15,9 @@ import java.util.ArrayList;
 /**
  * La classe main, dove il programma è inizializzato.
  * Per far partire il programma da linea di comando è necessario includere la classe Flatlaf nel seguente modo:
- * javac -classpath "./App.Lib/flatlaf-3.1.1.jar:" App.Main.java
+ * javac -classpath "./Lib/flatlaf-3.1.1.jar:" Main.java
  * per farlo partire invece
- * java -classpath "./App.Lib/flatlaf-3.1.1.jar:" App.Main
+ * java -classpath "./Lib/flatlaf-3.1.1.jar:" Main
  */
 public class Main {
 
