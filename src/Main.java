@@ -26,7 +26,6 @@ public class Main {
         if(SystemInfo.isMacOS){
             System.setProperty( "apple.laf.useScreenMenuBar", "true" );
             System.setProperty( "apple.awt.application.name", "Finance Tracker" );
-            //System.setProperty( "apple.awt.application.appearance", "system" );
         }
         else
             FlatLightLaf.setup();
